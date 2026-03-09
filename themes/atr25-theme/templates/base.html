@@ -7,6 +7,14 @@
   background: rgba(0,0,0,0.9) !important;
   backdrop-filter: blur(12px) !important;
 }
+body::after {
+ content: "";
+ position: fixed;
+ inset: 0;
+ background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
+ pointer-events: none;
+ z-index: 1;
+}
 </style>
   <title>{{ title or Configs.ctf_name }}</title>
   <meta charset="utf-8">
