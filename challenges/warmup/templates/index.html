@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secora CTF - Warmup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Secora CTF: Cookie Warmup</h1>
+        
+        {% if request.args.get('msg') %}
+        <div class="message">{{ request.args.get('msg') }}</div>
+        {% endif %}
+
+        {% if user %}
+        <div class="user-info">
+            <p>Welcome, <strong>{{ user.name }}</strong>!</p>
+            <p>Role: {{ user.role }}</p>
+            <p>ID: {{ user.id }}</p>
+            <p><a href="{{ url_for('admin') }}">Access Admin Panel</a></p>
+            <p><a href="{{ url_for('logout') }}">Logout</a></p>
+        </div>
+        {% else %}
+        <div id="login-form">
+            <form action="{{ url_for('login') }}" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">Don't have an account? <a href="#" onclick="toggleForm()">Register</a></p>
+        </div>
+
+        <div id="register-form" style="display: none;">
+            <form action="{{ url_for('register') }}" method="POST">
+                <input type="text" name="username" placeholder="Choose Username" required>
+                <input type="password" name="password" placeholder="Choose Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleForm() {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

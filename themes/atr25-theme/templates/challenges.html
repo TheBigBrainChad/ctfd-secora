@@ -1,6 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+.secora-ghost {
+    position: fixed;
+    width: var(--size);
+    height: auto;
+    bottom: -150px;
+    filter: drop-shadow(0 0 10px rgba(173, 216, 230, 0.5)) hue-rotate(180deg) grayscale(0.5);
+    pointer-events: none;
+    will-change: transform;
+    animation: ghostFloat var(--duration) linear infinite var(--delay);
+    z-index: -1;
+}
+
+@keyframes ghostFloat {
+    0% { transform: translate(var(--start-x), 0) rotate(-10deg); opacity: 0; }
+    10% { opacity: var(--max-opacity); }
+    90% { opacity: var(--max-opacity); }
+    100% { transform: translate(var(--end-x), -120vh) rotate(10deg); opacity: 0; }
+}
+</style>
+
+<div class="ghost-container" style="position: absolute; top:0; left:0; width: 100vw; height: 100vh; overflow: hidden; pointer-events: none; z-index: -1; position: fixed;">
+    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.6); pointer-events: none; z-index: -2;"></div>
+    <img src="/themes/atr25-theme/static/img/crew-green.png" class="secora-ghost" style="--duration: 45s; --delay: 0s; --start-x: 10vw; --end-x: 20vw; --size: 90px; --max-opacity: 0.15;">
+    <img src="/themes/atr25-theme/static/img/crew-orange.png" class="secora-ghost" style="--duration: 35s; --delay: 8s; --start-x: 80vw; --end-x: 60vw; --size: 70px; --max-opacity: 0.1;">
+    <img src="/themes/atr25-theme/static/img/crew-pink.png" class="secora-ghost" style="--duration: 50s; --delay: 20s; --start-x: 40vw; --end-x: 50vw; --size: 110px; --max-opacity: 0.12;">
+</div>
   <div class="jumbotron">
     <div class="container">
       <h1>
@@ -21,6 +48,15 @@
       @load-challenges.window="loadChallenges()" 
       @load-challenge.window="loadChallenge($event.detail)"
     >
+      <div class="au-taskbar-wrapper" x-show="loaded" style="position: fixed; top: 100px; left: 20px; width: 350px; z-index: 1040; display: flex; flex-direction: column; align-items: flex-start; pointer-events: none;">
+          <div style="font-family: Arial, sans-serif; font-weight: 900; font-size: 1.3rem; color: #fff; text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 4px 6px rgba(0,0,0,0.5); letter-spacing: 1px; margin-bottom: 5px;">
+              TOTAL TASKS COMPLETED
+          </div>
+          <div class="au-taskbar-bg" style="background-color: #3f4741; border: 4px solid #000; border-radius: 6px; height: 35px; width: 100%; position: relative; box-shadow: inset 0 8px rgba(0,0,0,0.3), inset 0 -8px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.5); overflow: hidden;">
+              <div class="au-taskbar-fill" :style="`width: ${Math.round((challenges.filter(c => c.solved_by_me).length / (challenges.length || 1)) * 100)}%; background-color: #2ecc71; height: 100%; border-right: 4px solid #000; box-shadow: inset 0 10px rgba(255,255,255,0.4), inset 0 -10px rgba(0,0,0,0.2); background-image: repeating-linear-gradient(90deg, transparent, transparent 36px, rgba(0,0,0,0.6) 36px, rgba(0,0,0,0.6) 40px); transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);`"></div>
+          </div>
+      </div>
+
       <div
           x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
           x-html="$store.challenge.data.view"

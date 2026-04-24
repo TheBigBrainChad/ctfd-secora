@@ -322,14 +322,14 @@ class MapManager {
 
   async renderRoomText() {
     const templateTexts = [
-      { text: "Main Hall", x: 764, y: 404 },
-      { text: "Reception", x: 350, y: 380 },
-      { text: "Deepwell|Archive", x: 90, y: 363 },
-      { text: "Cafeteria", x: 150, y: 100 },
-      { text: "Terrestrial|History", x: 363, y: 100 },
-      { text: "Astral|Sciences", x: 560, y: 100 },
-      { text: "Staff Halls", x: 753, y: 100 },
-      { text: "The Lion's|Eye|Diamond", x: 944, y: 100 },
+      { text: "DISCORD", x: 764, y: 404 },
+      { text: "CRYPTO", x: 350, y: 380 },
+      { text: "MISC", x: 90, y: 363 },
+      { text: "OSINT", x: 150, y: 100 },
+      { text: "WEB", x: 363, y: 100 },
+      { text: "PWN", x: 560, y: 100 },
+      { text: "REV", x: 753, y: 100 },
+      { text: "FORENSIC", x: 944, y: 100 },
     ];
     let texts = templateTexts;
     if (window["serverTexts"]) {

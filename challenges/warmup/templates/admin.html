@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Secora CTF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Control Center</h1>
+        <p>Welcome back, Administrator.</p>
+        <div class="user-info">
+            System Status: <span style="color: var(--primary-color);">ONLINE</span>
+        </div>
+        <div class="flag-box">
+            FLAG: {{ flag }}
+        </div>
+        <p style="margin-top: 2rem;"><a href="{{ url_for('index') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+
+</html>

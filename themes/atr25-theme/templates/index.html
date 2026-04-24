@@ -21,28 +21,6 @@
         overflow-x: hidden;
         min-height: 100vh;
     }
-    
-    .stars-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-    }
-    
-    .star {
-        position: absolute;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle 2s infinite ease-in-out;
-    }
-    
-    @keyframes twinkle {
-        0%, 100% { opacity: 0.3; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.2); }
-    }
 
     /* SECORA HERO SECTION - Full Width Breakout */
     .secora-hero-container {
@@ -72,28 +50,30 @@
         position: absolute;
         inset: 0;
         overflow: hidden;
-        z-index: 0;
+        z-index: -1;
         pointer-events: none;
     }
-    
-    .secora-floating-crew {
+
+.secora-floating-crew {
+    position: absolute;
+    width: var(--size);
+    height: auto;
+    left: -150px;
+    pointer-events: none;
+    will-change: transform;
+    animation: spaceFloat var(--duration) linear infinite var(--delay);
+    z-index: -1;
+}
+@keyframes spaceFloat {
+    0% { transform: translateY(var(--start-y)) rotate(0deg); }
+    100% { left: 110vw; transform: translateY(var(--end-y)) rotate(720deg); }
+}
+
         position: absolute;
-        width: var(--size);
-        height: auto;
-        left: -150px;
+        inset: 0;
+        overflow: hidden;
+        z-index: -1;
         pointer-events: none;
-        will-change: transform;
-        animation: spaceFloat var(--duration) linear infinite var(--delay);
-    }
-    
-    @keyframes spaceFloat {
-        0% {
-            transform: translateY(var(--start-y)) rotate(0deg);
-        }
-        100% {
-            left: 110vw;
-            transform: translateY(var(--end-y)) rotate(720deg);
-        }
     }
     
     .secora-hero-content {
@@ -102,6 +82,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        width: 100%;
     }
     
     .secora-hero-title {
@@ -177,9 +159,12 @@
         background: #2a2b2e;
         border: 6px solid #000;
         border-radius: 12px;
-        padding: 16px;
-        display: inline-block;
-        margin-bottom: 35px;
+        padding: 8px 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px auto;
         box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 0px #111, 0 12px 15px rgba(0,0,0,0.5);
         position: relative;
         z-index: 15;
@@ -188,7 +173,7 @@
     .secora-monitor-screen {
         background: #050a07;
         border-radius: 6px;
-        padding: 25px 35px;
+        padding: 15px 20px;
         border: 3px solid #000;
         box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.15);
         background-image: linear-gradient(rgba(0, 255, 0, 0.03) 50%, transparent 50%);
@@ -253,65 +238,6 @@
 }
 
 @media (max-width: 768px) {
-    /* Mainframe Status Monitor CRT */
-    .secora-status-monitor {
-        background: #2a2b2e;
-        border: 6px solid #000;
-        border-radius: 12px;
-        padding: 16px;
-        display: inline-block;
-        margin-bottom: 35px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 0px #111, 0 12px 15px rgba(0,0,0,0.5);
-        position: relative;
-        z-index: 15;
-    }
-    
-    .secora-monitor-screen {
-        background: #050a07;
-        border-radius: 6px;
-        padding: 25px 35px;
-        border: 3px solid #000;
-        box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.15);
-        background-image: linear-gradient(rgba(0, 255, 0, 0.03) 50%, transparent 50%);
-        background-size: 100% 4px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .secora-monitor-logo {
-        width: 140px;
-        height: auto;
-        margin-bottom: 18px;
-        animation: logoPulse 2s infinite alternate ease-in-out;
-    }
-    
-    .secora-monitor-text {
-        color: #50C878;
-        font-family: 'Share Tech Mono', monospace, sans-serif;
-        font-size: 1.3rem;
-        text-shadow: 0 0 8px #50C878;
-        letter-spacing: 2px;
-        animation: textFlicker 5s infinite;
-    }
-    
-    @keyframes logoPulse {
-        0% { transform: scale(0.95); filter: drop-shadow(0 0 8px rgba(80, 200, 120, 0.8)); }
-        100% { transform: scale(1.05); filter: drop-shadow(0 0 18px rgba(80, 200, 120, 1)); }
-    }
-    
-    @keyframes textFlicker {
-        0%, 96%, 98%, 100% { opacity: 1; }
-        97%, 99% { opacity: 0.6; text-shadow: none; }
-    }
-    
-    @media (max-width: 768px) {
-        .secora-monitor-logo { width: 90px; }
-        .secora-monitor-text { font-size: 1rem; }
-        .secora-monitor-screen { padding: 15px 20px; }
-    }
-
     .secora-ship-crest {
         width: 120px;
     }
@@ -394,7 +320,6 @@
             padding: 0 20px;
         }
         
-    
     /* Control Panel - Metal Desk Style */
     .secora-control-panel {
         background: #2a2b2e;
@@ -406,185 +331,13 @@
         margin: 0 auto;
         position: relative;
     }
-    
-    .secora-control-panel::before,
-    .secora-control-panel::after {
-        content: "";
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        background: #222;
-        border-radius: 50%;
-        box-shadow: 0 1px 2px rgba(255,255,255,0.2);
-    }
-    
-    .secora-control-panel::before { top: 10px; left: 10px; }
-    .secora-control-panel::after { top: 10px; right: 10px; }
-    
-    .secora-control-panel .screw-bottom-left,
-    .secora-control-panel .screw-bottom-right {
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        background: #222;
-        border-radius: 50%;
-        box-shadow: 0 1px 2px rgba(255,255,255,0.2);
-    }
-    
-    .secora-control-panel .screw-bottom-left { bottom: 10px; left: 10px; }
-    .secora-control-panel .screw-bottom-right { bottom: 10px; right: 10px; }
 
     .secora-hero-actions {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-/* Mainframe Status Monitor CRT */
-    .secora-status-monitor {
-        background: #2a2b2e;
-        border: 6px solid #000;
-        border-radius: 12px;
-        padding: 16px;
-        display: inline-block;
-        margin-bottom: 35px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 0px #111, 0 12px 15px rgba(0,0,0,0.5);
-        position: relative;
-        z-index: 15;
-    }
-    
-    .secora-monitor-screen {
-        background: #050a07;
-        border-radius: 6px;
-        padding: 25px 35px;
-        border: 3px solid #000;
-        box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.15);
-        background-image: linear-gradient(rgba(0, 255, 0, 0.03) 50%, transparent 50%);
-        background-size: 100% 4px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .secora-monitor-logo {
-        width: 140px;
-        height: auto;
-        margin-bottom: 18px;
-        animation: logoPulse 2s infinite alternate ease-in-out;
-    }
-    
-    .secora-monitor-text {
-        color: #50C878;
-        font-family: 'Share Tech Mono', monospace, sans-serif;
-        font-size: 1.3rem;
-        text-shadow: 0 0 8px #50C878;
-        letter-spacing: 2px;
-        animation: textFlicker 5s infinite;
-    }
-    
-    @keyframes logoPulse {
-        0% { transform: scale(0.95); filter: drop-shadow(0 0 8px rgba(80, 200, 120, 0.8)); }
-        100% { transform: scale(1.05); filter: drop-shadow(0 0 18px rgba(80, 200, 120, 1)); }
-    }
-    
-    @keyframes textFlicker {
-        0%, 96%, 98%, 100% { opacity: 1; }
-        97%, 99% { opacity: 0.6; text-shadow: none; }
-    }
-    
-    @media (max-width: 768px) {
-        .secora-monitor-logo { width: 90px; }
-        .secora-monitor-text { font-size: 1rem; }
-        .secora-monitor-screen { padding: 15px 20px; }
-    }
 
-    .secora-ship-crest {
-    width: 180px;
-    height: auto;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 15;
-    filter: drop-shadow(0 0 20px rgba(80, 200, 120, 0.8));
-    animation: hologramFloat 4s ease-in-out infinite;
-}
-
-@keyframes hologramFloat {
-    0%, 100% {
-        transform: translateY(0px);
-        filter: drop-shadow(0 0 20px rgba(80, 200, 120, 0.8));
-    }
-    50% {
-        transform: translateY(-10px);
-        filter: drop-shadow(0 0 30px rgba(138, 43, 226, 0.9));
-    }
-}
-
-@media (max-width: 768px) {
-    /* Mainframe Status Monitor CRT */
-    .secora-status-monitor {
-        background: #2a2b2e;
-        border: 6px solid #000;
-        border-radius: 12px;
-        padding: 16px;
-        display: inline-block;
-        margin-bottom: 35px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 0px #111, 0 12px 15px rgba(0,0,0,0.5);
-        position: relative;
-        z-index: 15;
-    }
-    
-    .secora-monitor-screen {
-        background: #050a07;
-        border-radius: 6px;
-        padding: 25px 35px;
-        border: 3px solid #000;
-        box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.15);
-        background-image: linear-gradient(rgba(0, 255, 0, 0.03) 50%, transparent 50%);
-        background-size: 100% 4px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .secora-monitor-logo {
-        width: 140px;
-        height: auto;
-        margin-bottom: 18px;
-        animation: logoPulse 2s infinite alternate ease-in-out;
-    }
-    
-    .secora-monitor-text {
-        color: #50C878;
-        font-family: 'Share Tech Mono', monospace, sans-serif;
-        font-size: 1.3rem;
-        text-shadow: 0 0 8px #50C878;
-        letter-spacing: 2px;
-        animation: textFlicker 5s infinite;
-    }
-    
-    @keyframes logoPulse {
-        0% { transform: scale(0.95); filter: drop-shadow(0 0 8px rgba(80, 200, 120, 0.8)); }
-        100% { transform: scale(1.05); filter: drop-shadow(0 0 18px rgba(80, 200, 120, 1)); }
-    }
-    
-    @keyframes textFlicker {
-        0%, 96%, 98%, 100% { opacity: 1; }
-        97%, 99% { opacity: 0.6; text-shadow: none; }
-    }
-    
-    @media (max-width: 768px) {
-        .secora-monitor-logo { width: 90px; }
-        .secora-monitor-text { font-size: 1rem; }
-        .secora-monitor-screen { padding: 15px 20px; }
-    }
-
-    .secora-ship-crest {
-        width: 120px;
-    }
-}
-
-        
         .secora-btn {
         font-family: 'Varela Round', 'Nunito', sans-serif;
             margin: 0;
@@ -628,8 +381,6 @@
         flex-wrap: wrap;
     }
     
-    }
-    
     .footer-links {
         position: relative;
         z-index: 1;
@@ -653,7 +404,6 @@
     }
 </style>
 
-<div class="stars-bg" id="starsBg"></div>
 
 <section class="secora-hero-container">
     <div class="secora-hero-background">
@@ -838,14 +588,18 @@
             <span class="secora-hud-countdown" id="countdownClock">CALCULATING...</span>
             <span class="secora-hud-warning"><span>☢️</span></span>
         </div>
-        
-        <div class="secora-hud-taskbar-wrapper">
-            <div class="secora-hud-taskbar-text" id="taskStats">CREWMATES: -- | TASKS: --</div>
-            <div class="secora-hud-taskbar-bg">
-                <div class="secora-hud-taskbar-fill" id="taskProgress"></div>
+        <div class="secora-hud-stats" style="margin-top: 15px; background: rgba(20,20,20,0.8); border: 2px solid #444; border-radius: 8px; padding: 10px 20px; display: flex; gap: 30px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 4px 6px rgba(0,0,0,0.5); border-top: 2px solid #666;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="color: #a0a0a0; font-family: Arial, sans-serif; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px;">CREWMATES ABOARD</span>
+                <span style="color: #2ecc71; font-family: 'Courier New', monospace; font-size: 1.8rem; font-weight: bold; text-shadow: 0 0 10px rgba(46,204,113,0.6);">{{ public_crew_count }}</span>
+            </div>
+            <div style="width: 2px; background: #333; border-right: 1px solid #111;"></div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <span style="color: #a0a0a0; font-family: Arial, sans-serif; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px;">SYSTEM VULNERABILITIES</span>
+                <span style="color: #e74c3c; font-family: 'Courier New', monospace; font-size: 1.8rem; font-weight: bold; text-shadow: 0 0 10px rgba(231,76,60,0.6);">{{ public_challenge_count }}</span>
             </div>
         </div>
-    </div>
+        </div>
 </section>
 
 
@@ -920,7 +674,10 @@
     }
     
     .secora-hud-warning span {
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         animation: spin 3s linear infinite;
     }
     .secora-hud-countdown {
@@ -964,131 +721,50 @@
     </style>
     
     <script>
-    (function() {
-        var taskStats = document.getElementById('taskStats');
-        var taskProgress = document.getElementById('taskProgress');
-        var countdownClock = document.getElementById('countdownClock');
-        
-        function fetchStats() {
-            var teams = 'CLASSIFIED';
-            var challenges = 0;
+(function() {
+    var countdownClock = document.getElementById('countdownClock');
+    var endTimeStr = "{{ public_ctf_end }}";
+    var endTime = null;
+    
+    if (endTimeStr && endTimeStr !== "None" && endTimeStr !== "") {
+        endTime = parseInt(endTimeStr);
+        if (endTime < 10000000000) endTime = endTime * 1000;
+    } else {
+        // Fallback end time from original spec
+        endTime = 1777590000 * 1000;
+    }
+    
+    if (endTime) {
+        var interval = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = endTime - now;
             
-            fetch('/api/v1/statistics/teams')
-                .then(function(r) { return r.json(); })
-                .then(function(d) {
-                    teams = d?.data?.length || d?.data?.total || 'CLASSIFIED';
-                    updateStats();
-                })
-                .catch(function() {
-                    teams = 'CLASSIFIED';
-                    updateStats();
-                });
-                
-            fetch('/api/v1/challenges')
-                .then(function(r) { return r.json(); })
-                .then(function(d) {
-                    challenges = d?.data?.length || 0;
-                    updateStats();
-                })
-                .catch(function() {
-                    challenges = 0;
-                    updateStats();
-                });
-                
-            function updateStats() {
-                if (taskStats) {
-                    taskStats.innerText = 'CREWMATES ABOARD: ' + teams + ' | VULNERABILITIES: ' + challenges;
-                }
-                if (taskProgress && challenges > 0) {
-                    var fillPercent = Math.min(challenges * 15, 100);
-                    taskProgress.style.width = fillPercent + '%';
-                }
+            if (distance < 0) {
+                clearInterval(interval);
+                if (countdownClock) countdownClock.innerText = 'CRITICAL FAILURE - SECORA BREACHED';
+                return;
             }
-        }
-        
-        function fetchEndTime() {
-            fetch('/api/v1/configs')
-                .then(function(r) { return r.json(); })
-                .then(function(d) {
-                    var endTime = 1777590000 * 1000;
-                    if (d.data) {
-                        d.data.forEach(function(item) {
-                            if (item.key === 'ctf_end') {
-                                endTime = parseInt(item.value) * 1000;
-                            }
-                        });
-                    }
-                    if (!endTime && window.init && window.init.ctf_end) {
-                        endTime = window.init.ctf_end * 1000;
-                    }
-                    
-                    if (endTime) {
-                        var interval = setInterval(function() {
-                            var now = new Date().getTime();
-                            var distance = endTime - now;
-                            
-                            if (distance < 0) {
-                                clearInterval(interval);
-                                if (countdownClock) {
-                                    countdownClock.innerText = 'CRITICAL FAILURE - SECORA BREACHED';
-                                }
-                                return;
-                            }
-                            
-                            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                            
-                            var display = '';
-                            if (days > 0) display += days + 'D ';
-                            display += hours.toString().padStart(2, '0') + ':';
-                            display += minutes.toString().padStart(2, '0') + ':';
-                            display += seconds.toString().padStart(2, '0');
-                            
-                            if (countdownClock) {
-                                countdownClock.innerText = display;
-                            }
-                        }, 1000);
-                    } else {
-                        if (countdownClock) {
-                            countdownClock.innerText = 'AWAITING CLEARANCE';
-                        }
-                    }
-                })
-                .catch(function() {
-                    if (countdownClock) {
-                        countdownClock.innerText = 'AWAITING CLEARANCE';
-                    }
-                });
-        }
-        
-        fetchStats();
-        fetchEndTime();
-    })();
-    </script>
+            
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            var display = '';
+            if (days > 0) display += days + 'D ';
+            display += hours.toString().padStart(2, '0') + ':';
+            display += minutes.toString().padStart(2, '0') + ':';
+            display += seconds.toString().padStart(2, '0');
+            
+            if (countdownClock) countdownClock.innerText = display;
+        }, 1000);
+    }
+})();
+</script>
 
     <a href="#" class="footer-link"><i class="fas fa-question-circle"></i> Rules</a>
-</div>
 
 <script>
-    // Stars background
-    (function() {
-        const starsContainer = document.getElementById('starsBg');
-        if (!starsContainer) return;
-        
-        for (let i = 0; i < 80; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.width = Math.random() * 3 + 1 + 'px';
-            star.style.height = star.style.width;
-            star.style.animationDelay = Math.random() * 2 + 's';
-            starsContainer.appendChild(star);
-        }
-    })();
-
     // Team count
     fetch('/api/v1/users/scoreboard')
         .then(r => r.json())

@@ -6,19 +6,19 @@
             position: fixed;
             inset: 0;
             z-index: 999999;
-            background: #000;
+            background: radial-gradient(circle at center, rgba(139, 0, 0, 0.2) 0%, #000 60%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: secoraFadeIn 1s ease-out;
+            animation: secoraBgPulse 3s ease-in-out infinite;
         }
         .secora-loader-overlay.fade-out {
             animation: secoraFadeOut 1s ease-in forwards;
         }
-        @keyframes secoraFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes secoraBgPulse {
+            0%, 100% { background: radial-gradient(circle at center, rgba(139, 0, 0, 0.15) 0%, #000 60%); }
+            50% { background: radial-gradient(circle at center, rgba(139, 0, 0, 0.3) 0%, #000 60%); }
         }
         @keyframes secoraFadeOut {
             from { opacity: 1; }
@@ -27,40 +27,45 @@
         .secora-loader-img {
             width: 200px;
             opacity: 0;
-            animation: secoraImgFade 2s ease-out forwards;
+            animation: roleReveal 3s cubic-bezier(0.1, 0.9, 0.2, 1) forwards, imgPulse 2s ease-in-out infinite 3s;
         }
-        @keyframes secoraImgFade {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes roleReveal {
+            0% { transform: scale(3); opacity: 0; }
+            15% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.05); opacity: 1; }
+        }
+        @keyframes imgPulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(80, 200, 120, 0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(80, 200, 120, 0.9)); }
         }
         .secora-loader-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 5rem;
             font-weight: bold;
-            color: #C51111;
-            text-shadow: 0 0 20px rgba(197, 17, 17, 0.8), 0 0 40px rgba(197, 17, 17, 0.5);
+            color: #ff0000;
+            text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000, 4px 4px 0 #000, 0 8px 0 rgba(0,0,0,0.8);
             margin-top: 30px;
             opacity: 0;
-            animation: secoraTitleFade 2s ease-out 0.5s forwards;
-        }
-        @keyframes secoraTitleFade {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            animation: roleReveal 3s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+            text-align: center;
         }
         .secora-loader-subtitle {
-            font-family: 'Fredoka One', sans-serif;
-            font-size: 1.8rem;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 1.5rem;
             color: #fff;
+            text-shadow: 2px 2px 0 #000;
             margin-top: 20px;
             min-height: 2rem;
+            text-align: center;
         }
         .secora-cursor {
             display: inline-block;
             width: 3px;
-            height: 1.8rem;
+            height: 1.5rem;
             background: #fff;
             margin-left: 5px;
             animation: secoraBlink 0.7s infinite;
+            vertical-align: middle;
         }
         @keyframes secoraBlink {
             0%, 50% { opacity: 1; }
@@ -105,8 +110,8 @@
         }
     }
 
-    // Start typewriter after 2.5 seconds
-    setTimeout(typeWriter, 2500);
+    // Start typewriter after 3 seconds (title animation finishes)
+    setTimeout(typeWriter, 3000);
 
     // 4. Cleanup Sequence
     setTimeout(function() {
@@ -115,5 +120,5 @@
             overlay.remove();
             style.remove();
         }, 1000);
-    }, 7000);
+    }, 8000);
 })();

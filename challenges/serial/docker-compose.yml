@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  web-serial:
+    build: .
+    container_name: web-serial-ctf
+    ports:
+      - "5003:80"
+    restart: unless-stopped
