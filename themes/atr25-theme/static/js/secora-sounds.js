@@ -10,7 +10,7 @@
 
     let shhAudio = null;
     if (isHome) {
-        shhAudio = new Audio('/themes/atr25-theme/static/sounds/intro.mp3');
+        shhAudio = new Audio('/themes/atr25-theme/static/sounds/intro_v2.mp3');
         shhAudio.volume = 0.8;
     }
 
